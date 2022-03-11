@@ -130,4 +130,11 @@ public class MainController {
 			return "/register";
         }
     }
+
+    // login page
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }

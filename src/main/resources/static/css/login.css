@@ -1,0 +1,67 @@
+.main-content .content {
+    max-width: 60%;
+    border-radius: 6px;
+    background-color: #333;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 4px;
+}
+
+.main-content .content .heading {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.main-content .content .error-message {
+    width: 90%;
+    margin: auto;
+    text-align: left;
+    color: #e30707;
+    margin-bottom: 10px;
+}
+
+input[type=text], input[type=password] {
+    border-radius: 6px;
+    border: none;
+    width: 90%;
+    padding: 14px 16px;
+    margin-top: 10px;
+}
+
+.main-content .content button {
+    background-color: #0066b8;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    padding: 14px 16px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.main-content .content button:hover {
+    background-color: #1e90ff;
+}
+
+.main-content .content .register-link {
+    margin-bottom: 10px;
+}
+
+.main-content .content .register-link a {
+    text-decoration: none;
+    color: #1e90ff;
+}
+
+.main-content .content .register-link a:hover {
+    color: #0066b8;
+}
+
+@media screen and (max-width: 700px) {
+    .main-content .content {
+        max-width: 98%;
+    }
+}

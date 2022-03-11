@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <title>Login</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header" th:replace="template :: header"></div>
+
+    <!-- Top Navigation Bar -->
+    <div class="topnav" th:replace="template :: topnav"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="sidenav" th:replace="template :: sidenav"></div>
+
+        <div class="content">
+            <div class="heading">
+                <h1>Login</h1>
+            </div>
+
+            <div class="error-message">
+                <div th:if="${param.error}">Invalid username or password.</div>
+            </div>
+            
+            <div class="error-message">
+                <div th:if="${param.logout}"> You have been logged out!</div>
+            </div>
+    
+            <form th:action="@{/login}" method="post">
+                <input type="text" name="username" placeholder="Email*">
+                <input type="password" name="password" placeholder="Password*">
+
+                <button type="submit">Login</button>
+
+                <p class="register-link">Don't have an account? <a th:href=@{/register}>Register</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" th:replace="template :: footer"></div>
+
+    <script src="https://kit.fontawesome.com/75dfcc00f1.js"></script>
+    <script th:src="@{/js/template.js}"></script>
+</body>
+</html>
