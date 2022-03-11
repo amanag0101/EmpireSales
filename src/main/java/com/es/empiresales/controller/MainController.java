@@ -1,10 +1,14 @@
 package com.es.empiresales.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.es.empiresales.entity.Category;
 import com.es.empiresales.entity.User;
 import com.es.empiresales.helper.Message;
+import com.es.empiresales.repository.CategoryRepo;
 import com.es.empiresales.repository.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +23,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MainController {
     @Autowired UserRepo userRepo;
+    @Autowired CategoryRepo categoryRepo;
+
+    @ModelAttribute
+    public void commonAttributes(Model m) {
+        List<Category> allCategoriesList = categoryRepo.findAll();
+        if(allCategoriesList != null)
+            m.addAttribute("allCategoriesList", allCategoriesList);
+    }
 
     // default page
     @RequestMapping("/")
     public String index() {
+        return "redirect:/all/0";
+    }
+
+    @RequestMapping("/all/0")
+    public String showAllProducts() {
         return "index";
     }
 
