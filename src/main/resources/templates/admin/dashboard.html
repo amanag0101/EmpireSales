@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/admin/dashboard.css}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="branding col">
+            <img th:src="@{/img/logo.png}" alt="img">
+            <p>Empire Sales</p>
+        </div>
+
+        <div class="col-2 col">
+            <p>Hello, Admin</p>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+
+    <!-- Error or Success Message -->
+    <div class="message">
+        <p th:if="${session.message}" th:classappend="${session.message.type}" 
+            th:text="${session.message.message}"></p>
+        <th:block th:if="${session.message}" th:text="${#session.removeAttribute('message')}"></th:block>
+    </div>
+
+    <div class="content">
+        <div class="row-1 row">
+            <!-- User Count -->
+            <div class="col-1 col">
+                <img class="logo" th:src="@{/img/users.png}" alt="img">
+                <p class="heading">USERS</p>
+                <p class="value" th:text="${userCount}"></p>
+            </div>
+
+            <!-- Category Count -->
+            <div class="col-2 col">
+                <img class="logo" th:src="@{/img/categories.png}" alt="img">
+                <p class="heading">CATEGORIES</p>
+                <p class="value" th:text="${categoryCount}"></p>
+            </div>
+
+            <!-- Product Count -->
+            <div class="col-3 col">
+                <img class="logo" th:src="@{/img/products.png}" alt="img">
+                <p class="heading">PRODUCTS</p>
+                <p class="value" th:text="${productCount}"></p>
+            </div>
+        </div>
+
+        <div class="row-2 row" row>
+            <!-- Add Category -->
+            <div id="add-category" class="col-1 col">
+                <img class="logo" th:src="@{/img/add-category.png}" alt="img">
+                <p class="heading">ADD CATEGORY</p>
+            </div>
+
+            <div id="add-product" class="col-2 col">
+                <!-- Add Product -->
+                <img class="logo" th:src="@{/img/add-product.png}" alt="img">
+                <p class="heading">ADD PRODUCT</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div id="add-category-modal" class="modal">
+        <div class="container">
+            <p class="heading">Add Category</p>
+            <span id="close-add-category-modal" class="close">&times;</span>
+            
+            <form th:action="@{/processing-add-category}" method="post" th:object="${category}"> 
+                <input class="category" name="name" type="text" placeholder="Category" th:value="${category.name}">
+                
+                <textarea class="about" name="description" rows="10" 
+                    placeholder="Enter details about the category" th:value="${category.description}"></textarea>
+               
+                <button class="addbtn" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="modal">
+        <div class="container">
+            <p class="heading">Add Product</p>
+            <span id="close-add-product-modal" class="close">&times;</span>
+
+            <form class="form" th:action="@{/processing-add-product}" method="post" enctype="multipart/form-data">
+                <div class="row-1 row">
+                    <label class="col-1" for="name">Product Name</label>
+                    <input class="name col-2" name="name" type="text" placeholder="Product Name" th:value="${product.name}">
+                </div>
+               
+                <div class="row-2 row">
+                    <label class="col-1" for="price">Product Price</label>
+                    <input class="price col-2" name="price" type="number" step="0.01" placeholder="Product Price" th:value="${product.price}">
+                </div>
+
+                <div class="row-3 row">
+                    <label class="col-1" for="discount">Product Discount</label>
+                    <input class="discount col-2" name="discount" type="number" placeholder="Product Discount" th:value="${product.discount}">
+                </div>
+               
+                <div class="row-4 row">
+                    <label class="col-1" for="quantity">Product Quantity</label>
+                    <input class="quantity col-2" name="quantity" type="number" placeholder="Enter Quantity" th:value="${product.quantity}">
+                </div>
+
+                <div class="row-5 row">
+                    <label class="col-1" for="category">Product Category</label>
+                    <select class="category col-2" name="productCategoryId">
+                        <th:block th:each="c : ${allCategoriesList}">
+                            <option th:value="${c.id}" th:text="${c.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                
+                <textarea class="about" name="description" rows="10" placeholder="Enter details about the product" 
+                    th:value="${product.description}"></textarea>
+                
+                <div class="image">
+                    <label for="image"><b>Product Image</b></label>
+                    <input name="productImage" type="file">
+                </div>
+
+                <button class="addbtn" type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin/dashboard.js}"></script>
+</body>
+</html> 

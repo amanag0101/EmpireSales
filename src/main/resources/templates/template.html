@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
+    <title>Template</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header" th:fragment="header">
+        <div class="branding">
+            <img th:src="@{/img/logo.png}" alt="img">
+            <p>Empire Sales</p>
+        </div>
+
+        <div class="navbar">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/register}">Register / Login</a>
+        </div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <div class="topnav" id="topnav" th:fragment="topnav">
+        <i class="fa-solid fa-bars hamburger" onclick="toggleSidebar()"></i>
+
+        <li class="active"><a href="#">All Categories</a></li>
+        <li><a href="#">Category 1</a></li>
+        <li><a href="#">Category 2</a></li>
+    </div>
+
+    <!-- Content -->
+    <div class="main-content">
+        <div id="sidenav" class="sidenav" th:fragment="sidenav">
+            <li class="close" onclick="toggleSidebar()">&times;</li>
+            <li class="active"><a href="#">All Categories</a></li>
+            <li><a href="#">Category 1</a></li>
+            <li><a href="#">Category 2</a></li>
+        </div>
+
+        <div class="content"></div>
+    </div>
+
+
+    <!-- Footer -->
+    <div class="footer" th:fragment="footer">
+        <div class="col col-1">
+            <h3 class="heading">About</h3>
+            <p>Contact Us</p>
+            <p>About Us</p>
+            <p>FAQ</p>
+        </div>
+
+        <div class="col col-2">
+            <h3 class="heading">Help</h3>
+            <p>Cancellation and Returns</p>
+            <p>Payments</p>
+            <p>Shipping</p>
+        </div>
+
+        <div class="col col-3">
+            <h3 class="heading">Policy</h3>
+            <p>Terms of Use</p>
+            <p>Privacy</p>
+            <p>Security</p>
+        </div>
+
+        <div class="col col-4">
+            <h3 class="heading">Social Media</h3>
+            <p>Instagram</p>
+            <p>YouTube</p>
+            <p>Twitter</p>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/75dfcc00f1.js"></script>
+    <script th:src="@{/js/template.js}"></script>
+</body>
+</html>
