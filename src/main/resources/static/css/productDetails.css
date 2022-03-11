@@ -1,0 +1,49 @@
+.main-content .content .container {
+    display: flex;
+    padding: 8px;
+}
+
+.main-content .content .container .col-1 {
+    flex: 30%;
+}
+
+.main-content .content .container .col-2 {
+    margin-right: 10px;
+    margin-left: 30px;
+    margin-top: 55px;
+    flex: 70%;
+}
+
+.main-content .content .container .col-1 .main-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.main-content .content .container .col-2 .name {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.main-content .content .container .col-2 .description p {
+    margin-top: 10px;
+}
+
+.main-content .content .container .col-2 .price {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Media Queries */
+@media(max-width: 700px) {
+    .main-content .content .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+    }
+
+    .main-content .content .container .col-2 {
+        margin-left: 5px;
+    }
+}

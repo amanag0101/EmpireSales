@@ -16,6 +16,22 @@
         <div class="sidenav" th:replace="template :: sidenav"></div>
 
         <div class="content">
+            <div class="container">
+                <div class="col-1 col">
+                    <img class="main-img" th:src="@{'/img/products/' + ${product.id}}" alr="img">
+                </div>
+            
+                <div class="col-2 col">
+                    <p class="name" th:text="${product.name}"></p>
+
+                    <div class="description">
+                        <h2>About the product</h2>
+                        <p th:text="${product.description}"></p>
+                    </div>
+                    
+                    <p class="price" th:text="'&#8377; ' + ${product.price}"></p>
+                </div>
+            </div>
         </div>
     </div>
 

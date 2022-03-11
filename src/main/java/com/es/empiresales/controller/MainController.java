@@ -68,6 +68,11 @@ public class MainController {
     // show specific product details
     @RequestMapping("/product/{productId}")
     public String showProductDetails(@PathVariable("productId") Long productId, Model m) {
+        Product product = productRepo.getById(productId);
+        
+        if(product != null)
+            m.addAttribute("product", product);
+            
         return "productDetails";
     }
     
