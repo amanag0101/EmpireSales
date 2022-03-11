@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/user/template.css}">
+    <title>Empire Sales</title>
+</head>
+<body>
+    <div class="header" th:fragment="header">
+        <div class="branding">
+            <img th:src="@{/img/logo.png}" alt="img">
+            <p>Empire Sales</p>
+        </div>
+
+        <div class="navbar">
+            <p th:text="${username}"></p>
+
+            <form th:action="@{/logout}" method="post">
+                <button class="logout" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

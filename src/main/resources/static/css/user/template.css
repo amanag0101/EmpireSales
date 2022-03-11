@@ -1,0 +1,66 @@
+/* 
+    black: #333
+
+    dodgerblue: #1e90ff
+
+    blue: #054d86 (dark)
+    blue: #0066b8 (light)
+
+    red: #bb1414
+
+    green: #17aa17
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+}
+
+.header .branding {
+    display: flex;
+    align-items: center;
+    flex-basis: 30%;
+}
+
+.header .branding img {
+    max-width: 70px;
+    max-height: 70px;
+}
+
+.header .navbar {
+    display: flex;
+    flex-basis: 70%;
+    justify-content: right;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.header .navbar p {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+    padding: 4px;
+}
+
+.header .logout {
+    background: none;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+}
+
+.header .logout:hover {
+    color: #1e90ff;
+}
