@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
+    <link rel="stylesheet" th:href="@{/css/productDetails.css}">
+    <title>Empire Sales</title>
+</head>
+<body>
+    <div class="header" th:replace="template :: header"></div>
+
+    <div class="tonav" th:replace="template :: topnav"></div>
+
+    <div class="main-content">
+        <div class="sidenav" th:replace="template :: sidenav"></div>
+
+        <div class="content">
+        </div>
+    </div>
+
+    <div class="footer" th:replace="template :: footer"></div>
+
+    <script src="https://kit.fontawesome.com/75dfcc00f1.js"></script>
+    <script th:src="@{/js/template.js}"></script>
+</body>
+</html>

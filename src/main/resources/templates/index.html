@@ -18,9 +18,11 @@
         <div class="content">
             <div class="row">
                 <div class="col" th:each="p : ${allProductsList}">
-                    <img class="img" th:src="@{'/img/products/' + ${p.imageUrl}}" alt="img">
-                    <a class="name" th:href="@{'/product/' + ${p.id}}" th:text="${p.name}"></a>
-                    <p class="price" th:text="'&#8377; ' + ${p.price}"></p>
+                    <a th:href="@{'/product/' + ${p.id}}">
+                        <img class="img" th:src="@{'/img/products/' + ${p.imageUrl}}" alt="img">
+                        <p class="name" th:text="${p.name}"></p>
+                        <p class="price" th:text="'&#8377; ' + ${p.price}"></p>
+                    </a>
                 </div>
             </div>
         </div>

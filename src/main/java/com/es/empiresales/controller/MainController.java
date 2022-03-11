@@ -65,6 +65,12 @@ public class MainController {
         return "index";
     }
     
+    // show specific product details
+    @RequestMapping("/product/{productId}")
+    public String showProductDetails(@PathVariable("productId") Long productId, Model m) {
+        return "productDetails";
+    }
+    
     // regiser page
     @RequestMapping("/register")
     public String register(Model m) {

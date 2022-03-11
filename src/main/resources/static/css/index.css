@@ -16,6 +16,11 @@
     padding: 8px;
 }
 
+.main-content .col a {
+    text-decoration: none;
+    color: #000;
+}
+
 .main-content .col:hover {
     background-color: #1e90ff;
 }
@@ -27,7 +32,6 @@
 
 .main-content .row .col .name {
     text-decoration: none;
-    color: purple;
     font-weight: bold;
     margin-top: 5px;
     display: block;
