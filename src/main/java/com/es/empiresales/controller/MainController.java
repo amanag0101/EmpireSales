@@ -6,16 +6,22 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.es.empiresales.entity.Category;
+import com.es.empiresales.entity.Product;
 import com.es.empiresales.entity.User;
 import com.es.empiresales.helper.Message;
 import com.es.empiresales.repository.CategoryRepo;
+import com.es.empiresales.repository.ProductRepo;
 import com.es.empiresales.repository.UserRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MainController {
     @Autowired UserRepo userRepo;
     @Autowired CategoryRepo categoryRepo;
+    @Autowired ProductRepo productRepo;
 
     @ModelAttribute
     public void commonAttributes(Model m) {
@@ -38,8 +45,15 @@ public class MainController {
         return "redirect:/all/0";
     }
 
-    @RequestMapping("/all/0")
-    public String showAllProducts() {
+    @RequestMapping("/all/{page}")
+    public String showAllProducts(@PathVariable("page") Integer page, Model m) {
+        Pageable pageable = PageRequest.of(page, 1);
+        Page<Product> allProductsList = productRepo.findAll(pageable);
+
+        m.addAttribute("allProductsList", allProductsList);
+        m.addAttribute("currentPage", page);
+        m.addAttribute("totalPages", allProductsList.getTotalPages());
+
         return "index";
     }
 
