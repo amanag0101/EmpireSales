@@ -1,5 +1,6 @@
 package com.es.empiresales.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +33,8 @@ public class MainController {
     @Autowired UserRepo userRepo;
     @Autowired CategoryRepo categoryRepo;
     @Autowired ProductRepo productRepo;
+
+    @Autowired BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @ModelAttribute
     public void commonAttributes(Model m) {
@@ -120,6 +124,9 @@ public class MainController {
 
         // add user in the database
         try {
+            // encode the password
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
             userRepo.save(user);
             session.setAttribute("message", new Message("success", "Registration Complete!"));
 			return "redirect:/register";
@@ -137,4 +144,17 @@ public class MainController {
         return "login";
     }
 
+    // process login form
+    @RequestMapping("/processing-login-form")
+    public String processLoginForm(Principal principal) {
+        String username = principal.getName();
+        User user = userRepo.findByEmail(username);
+
+        if(user.getRole().equals("ROLE_ADMIN"))
+            return "redirect:/admin/";
+        else if(user.getRole().equals("ROLE_USER"))
+            return "redirect:/user/";
+        else
+            return "unauthorized";
+    }
 }
