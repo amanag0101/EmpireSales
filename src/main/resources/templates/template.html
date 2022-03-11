@@ -15,7 +15,7 @@
         </div>
 
         <div class="navbar">
-            <a th:href="@{/all/0}">Home</a>
+            <a th:href="@{/all/0/}">Home</a>
             <a th:href="@{/register}">Register / Login</a>
         </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="topnav" id="topnav" th:fragment="topnav">
         <i class="fa-solid fa-bars hamburger" onclick="toggleSidebar()"></i>
 
-        <li th:classappend="${#request.requestURI.startsWith('/all/') ? 'active' : ''}"><a th:href="@{/all/0}">All Categories</a></li>
+        <li th:classappend="${#request.requestURI.startsWith('/all/') ? 'active' : ''}"><a th:href="@{/all/0/}">All Categories</a></li>
         <li th:each="c : ${allCategoriesList}" th:classappend="${#request.requestURI.startsWith('/' + c.name + '/') ? 'active' : ''}">
             <a th:text="${c.name}" th:href="@{'/' + ${c.name} + '/0/'}"></a></li>
     </div>
@@ -33,7 +33,7 @@
     <div class="main-content">
         <div id="sidenav" class="sidenav" th:fragment="sidenav">
             <li class="close" onclick="toggleSidebar()">&times;</li>
-            <li th:classappend="${#request.requestURI.startsWith('/all/') ? 'active' : ''}"><a th:href="@{/all/0}">All Categories</a></li>
+            <li th:classappend="${#request.requestURI.startsWith('/all/') ? 'active' : ''}"><a th:href="@{/all/0/}">All Categories</a></li>
             <li th:each="c : ${allCategoriesList}" th:classappend="${#request.requestURI.startsWith('/' + c.name + '/') ? 'active' : ''}">
                 <a th:text="${c.name}" th:href="@{'/' + ${c.name} + '/0/'}"></a></li>
         </div>

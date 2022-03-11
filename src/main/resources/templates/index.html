@@ -27,7 +27,7 @@
     </div>
 
     <!-- Pagination -->
-    <div class="pagination">
+    <div th:if="${totalPages > 0}" class="pagination">
         <a th:if="${currentPage != 0}"  th:href="@{'/all/'+${currentPage - 1}}">&laquo;</a>
         <a th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" th:href="@{'/all/'+${i-1}}"><span th:text="${i}"></span></a>
         <a th:if="${currentPage+1 != totalPages}"  th:href="@{'/all/'+${currentPage + 1}}">&raquo;</a>

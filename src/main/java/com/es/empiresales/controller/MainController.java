@@ -42,14 +42,19 @@ public class MainController {
     // default page
     @RequestMapping("/")
     public String index() {
-        return "redirect:/all/0";
+        return "redirect:/all/0/";
     }
 
     // show all the products
-    @RequestMapping("/all/{page}")
-    public String showAllProducts(@PathVariable("page") Integer page, Model m) {
+    @RequestMapping("/{category}/{page}/")
+    public String showAllProducts(@PathVariable("category") String categoryName, @PathVariable("page") Integer page, Model m) {
         Pageable pageable = PageRequest.of(page, 3);
-        Page<Product> allProductsList = productRepo.findAll(pageable);
+        Page<Product> allProductsList = null;
+
+        if(categoryName.equals("all"))
+            allProductsList = productRepo.findAll(pageable);
+        else 
+            allProductsList = productRepo.findAllByCategoryName(categoryName, pageable);
 
         if(allProductsList != null)
             m.addAttribute("allProductsList", allProductsList);
@@ -59,22 +64,7 @@ public class MainController {
 
         return "index";
     }
-
-    // show products filtered by category
-    @RequestMapping("/{category}/{page}/")
-    public String showProuctsByCategory(@PathVariable("category") String categoryName, @PathVariable("page") Integer page, Model m) {
-        Pageable pageable = PageRequest.of(page, 3);
-        Page<Product> allProductsList = productRepo.findAllByCategoryName(categoryName, pageable);
-
-        if(allProductsList != null)
-            m.addAttribute("allProductsList", allProductsList);
-
-        m.addAttribute("currentPage", page);
-        m.addAttribute("totalPages", allProductsList.getTotalPages());
-
-        return "index";
-    }
-
+    
     // regiser page
     @RequestMapping("/register")
     public String register(Model m) {
