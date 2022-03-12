@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
     <link rel="stylesheet" th:href="@{/css/user/template.css}">
     <title>Empire Sales</title>
 </head>
 <body>
+    <!-- Header -->
     <div class="header" th:fragment="header">
         <div class="branding">
             <img th:src="@{/img/logo.png}" alt="img">
@@ -21,5 +23,29 @@
             </form>
         </div>
     </div>
+
+    <!-- Top Navigation Bar -->
+    <div class="topnav" id="topnav" th:fragment="topnav">
+        <i class="fa-solid fa-bars hamburger" onclick="toggleSidebar()"></i>
+
+        <li th:classappend="${#request.requestURI.startsWith('/user/all/') ? 'active' : ''}"><a th:href="@{/user/all/0/}">All Categories</a></li>
+        <li th:each="c : ${allCategoriesList}" th:classappend="${#request.requestURI.startsWith('/user/' + c.name + '/') ? 'active' : ''}">
+            <a th:text="${c.name}" th:href="@{'/user/' + ${c.name} + '/0/'}"></a></li>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <div id="sidenav" class="sidenav" th:fragment="sidenav">
+            <li class="close" onclick="toggleSidebar()">&times;</li>
+            <li th:classappend="${#request.requestURI.startsWith('/user/all/') ? 'active' : ''}"><a th:href="@{/user/all/0/}">All Categories</a></li>
+            <li th:each="c : ${allCategoriesList}" th:classappend="${#request.requestURI.startsWith('/user/' + c.name + '/') ? 'active' : ''}">
+                <a th:text="${c.name}" th:href="@{'/user/' + ${c.name} + '/0/'}"></a></li>
+        </div>
+
+        <div class="content"></div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/75dfcc00f1.js"></script>
+    <script th:src="@{/js/template.js}"></script>
 </body>
 </html>

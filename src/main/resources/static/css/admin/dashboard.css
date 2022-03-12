@@ -53,8 +53,15 @@ body a:hover {
     margin-right: 20px;
 }
 
-.header .col-2 a {
-    margin-right: 10px;
+.header .col-2 .logout {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.header .col-2 .logout:hover {
+    color: #1e90ff;
 }
 
 /* Message */

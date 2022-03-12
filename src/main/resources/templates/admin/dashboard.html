@@ -15,8 +15,11 @@
         </div>
 
         <div class="col-2 col">
-            <p>Hello, Admin</p>
-            <a th:href="@{/logout}">Logout</a>
+            <p>Admin</p>
+
+            <form th:action="@{/logout}" method="post">
+                <button class="logout" type="submit">Logout</button>
+            </form>
         </div>
     </div>
 
