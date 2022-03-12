@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/template.css}">
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/productDetails.css}">
     <link rel="stylesheet" th:href="@{/css/user/template.css}">
+    <link rel="stylesheet" th:href="@{/css/user/productDetails.css}">
     <title>Empire Sales</title>
 </head>
 <body>
@@ -20,24 +21,28 @@
         <div class="sidenav" th:replace="/user/template :: sidenav"></div>
 
         <div class="content">
-            <div class="row">
-                <div class="col" th:each="p : ${allProductsList}">
-                    <a th:href="@{'/user/product/' + ${p.id}}">
-                        <img class="img" th:src="@{'/img/products/' + ${p.imageUrl}}" alt="img">
-                        <p class="name" th:text="${p.name}"></p>
-                        <p class="price" th:text="'&#8377; ' + ${p.price}"></p>
-                    </a>
+            <div class="container">
+                <div class="col-1 col">
+                    <img class="main-img" th:src="@{'/img/products/' + ${product.id}}" alr="img">
+                </div>
+            
+                <div class="col-2 col">
+                    <p class="name" th:text="${product.name}"></p>
+
+                    <div class="description">
+                        <h2>About the product</h2>
+                        <p th:text="${product.description}"></p>
+                    </div>
+                    
+                    <p class="price" th:text="'&#8377; ' + ${product.price}"></p>
+
+                    <div class="add-to-cart">
+                        <!-- <a th:href="@{'/user/add-to-cart/' + ${product.id}}">Add to Cart</a> -->
+                        <a href="#">Add to Cart</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Pagination -->
-    <div th:if="${totalPages > 0}" class="pagination">
-        <a th:if="${currentPage != 0}"  th:href="@{'/user/all/'+${currentPage - 1} + '/'}">&laquo;</a>
-        <a th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" 
-            th:href="@{'/user/all/'+${i-1} + '/'}"><span th:text="${i}"></span></a>
-        <a th:if="${currentPage+1 != totalPages}"  th:href="@{'/user/all/' + ${currentPage + 1} + '/'}">&raquo;</a>
     </div>
 
     <!-- Footer -->

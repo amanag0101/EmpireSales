@@ -63,4 +63,15 @@ public class UserController {
 
         return "/user/home";
     }
+
+    // show specific product details
+    @RequestMapping("/user/product/{productId}")
+    public String showProductDetails(@PathVariable("productId") Long productId, Model m) {
+        Product product = productRepo.getById(productId);
+        
+        if(product != null)
+            m.addAttribute("product", product);
+            
+        return "/user/productDetails";
+    }
 }

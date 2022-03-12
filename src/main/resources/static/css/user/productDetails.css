@@ -1,0 +1,15 @@
+.main-content .content .container .col-2 .add-to-cart {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.main-content .content .container .col-2 .add-to-cart a {
+    background-color: #0066b8;
+    text-decoration: none;
+    padding: 8px 12px;
+    color: #fff;
+}
+
+.main-content .content .container .col-2 .add-to-cart a:hover {
+    background-color: #1e90ff;
+}
