@@ -20,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -37,6 +39,10 @@ public class UserController {
         List<Category> allCategoriesList = categoryRepo.findAll();
         if(allCategoriesList != null)
             m.addAttribute("allCategoriesList", allCategoriesList);
+
+        Integer cartItemCount = cartRepo.getCountOfItems(user);
+        if(cartItemCount != null)
+            m.addAttribute("cartItemCount", cartItemCount);  
 
         m.addAttribute("username", user.getName());
     }
@@ -97,5 +103,62 @@ public class UserController {
         }
 
         return "/user/cart";
+    }
+
+    // add to cart
+    @RequestMapping("/user/add-to-cart/{productId}")
+    public String addToCart(@PathVariable("productId") Long productId, Principal principal) {
+        String username = principal.getName();
+        User user = userRepo.findByEmail(username);
+        Product product = productRepo.getById(productId);
+
+        Cart cart = cartRepo.getByUserAndProductId(user, productId);
+        // add the product if cart is empty
+        if(cart == null) {
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setProduct(product);
+            cart.setQuantity(1);
+        }
+        // increase procut quantity if product already present
+        else {
+            cart.setQuantity(cart.getQuantity() + 1);
+        }
+
+        // save the product in cart
+        cartRepo.save(cart);
+
+        return "redirect:/user/cart";
+    }
+
+    // update quantity of an item in the cart
+    @PostMapping("/user/update-item-quantity/{productId}")
+    public String updateCartItemQuantity(@PathVariable("productId") Long productId,
+    @RequestParam(value = "itemQuantity") int itemQuantity, Principal principal) {
+        if(itemQuantity <= 0) {
+            deleteCartItem(productId, principal);
+            return "redirect:/user/cart";
+        }
+
+        String username = principal.getName();
+        User user = userRepo.findByEmail(username);
+        Cart item = cartRepo.getByUserAndProductId(user, productId);
+
+        item.setQuantity(itemQuantity);
+        cartRepo.save(item);
+
+        return "redirect:/user/cart";
+    }  
+
+    // delete item from cart
+    @PostMapping("/user/delete-item/{productId}")
+    public String deleteCartItem(@PathVariable("productId") Long productId, Principal principal) {
+        String username = principal.getName();
+        User user = userRepo.findByEmail(username);
+        Cart item = cartRepo.getByUserAndProductId(user, productId);
+
+        cartRepo.delete(item);
+
+        return "redirect:/user/cart";
     }
 }
