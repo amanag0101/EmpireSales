@@ -41,7 +41,7 @@ public class UserController {
     // homepage
     @RequestMapping("/user")
     public String home() {
-        return "/user/home";
+        return "redirect:/user/all/0/";
     }
 
     // show all the products

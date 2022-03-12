@@ -15,7 +15,7 @@
     <div class="main-content">
         <div class="sidenav" th:replace="template :: sidenav"></div>
 
-        <div class="content">
+        <div class="content" th:fragment="content">
             <div class="row">
                 <div class="col" th:each="p : ${allProductsList}">
                     <a th:href="@{'/product/' + ${p.id}}">

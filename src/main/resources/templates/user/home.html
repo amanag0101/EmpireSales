@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/template.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
     <link rel="stylesheet" th:href="@{/css/user/template.css}">
     <title>Empire Sales</title>
 </head>
@@ -18,9 +19,15 @@
     <div class="main-content">
         <div class="sidenav" th:replace="/user/template :: sidenav"></div>
 
-        <div class="content">
+        <div class="content" th:replace="index :: content"></div>
+    </div>
 
-        </div>
+    <!-- Pagination -->
+    <div th:if="${totalPages > 0}" class="pagination">
+        <a th:if="${currentPage != 0}"  th:href="@{'/user/all/'+${currentPage - 1} + '/'}">&laquo;</a>
+        <a th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" 
+            th:href="@{'/user/all/'+${i-1} + '/'}"><span th:text="${i}"></span></a>
+        <a th:if="${currentPage+1 != totalPages}"  th:href="@{'/user/all/' + ${currentPage + 1} + '/'}">&raquo;</a>
     </div>
 
     <!-- Footer -->
