@@ -1,0 +1,115 @@
+body {
+    background-color: #ccc;
+}
+
+.main-content .content {
+    background-color: #fff;
+    max-width: 80%;
+    margin: auto;
+    padding: 12px;
+}
+
+.content .heading {
+    font-size: 22px;
+}
+
+.main-content .content .card {
+    display: flex;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding: 8px;
+    align-items: center;
+}
+
+.main-content .content .card .col-1 {
+    flex: 20%;
+}
+
+.main-content .content .card .col-2 {
+    flex: 60%;
+}
+
+.main-content .content .card .col-2 .quantity {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.main-content .content .card .col-2 .quantity p, 
+.main-content .content .card .col-2 .quantity .value {
+    margin-right: 8px;
+}
+
+.main-content .content .card .col-2 .quantity .value {
+    max-width: 50px;
+}
+
+.main-content .content .card .col-2 .name {
+    font-size: 25px;
+}
+
+.main-content .content .card .col-2 .stock {
+    font-size: 14px;
+    color: #17aa17;
+    margin-top: 3px;
+}
+
+.main-content .content .card .col-2 .shipping {
+    font-size: 14px;
+    color: gray;
+    margin-top: 3px;
+}
+
+.main-content .content .card .col-2 .delete-item {
+    margin-top: 7px;
+}
+
+.main-content .content .card .col-3 {
+    flex: 20%;
+}
+
+.main-content .content .card .col-3 .price {
+    font-weight: bold;
+}
+
+.main-content .content .img {
+    width: 100px;
+    height: 100px;
+}
+
+.main-content .total-cost {
+    border-top: 1px solid #ccc;
+    text-align: right;
+    margin-top: 5px;
+}
+
+.main-content .total-cost p {
+    max-width: 85%;
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* removing arrows from number input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+@media(max-width: 700px) {
+    .main-content .content .card {
+        flex-direction: column;
+    }
+
+    .main-content .content .card .col-3 {
+        width: 100%;
+        text-align: right;
+        /* font-weight: bold; */
+    }
+}

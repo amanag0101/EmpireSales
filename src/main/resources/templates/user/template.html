@@ -16,6 +16,9 @@
         </div>
 
         <div class="navbar">
+            <a class="fa-solid fa-cart-shopping" id="cart-btn" th:href="@{/user/cart}"></a>
+            <a th:if="${cartItemCount > 0}" class="cart-count" th:text="'(' + ${cartItemCount} + ')'"></a> 
+
             <p th:text="${username}"></p>
 
             <form th:action="@{/logout}" method="post">

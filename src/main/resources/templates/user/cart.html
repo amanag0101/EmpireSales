@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/template.css}">
+    <link rel="stylesheet" th:href="@{/css/user/template.css}">
+    <link rel="stylesheet" th:href="@{/css/user/cart.css}">
+    <title>Empire Sales</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header" th:replace="/user/template :: header"></div>
+
+    <!-- Top Navigation Bar -->
+    <div class="topnav" th:replace="/user/template :: topnav"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="sidenav" th:replace="/user/template :: sidenav"></div>
+
+        <div class="content">
+            <p class="heading">Shopping Cart</p>
+         
+            <div class="card" th:each="item : ${cartList}">
+                <div class="col-1 col">
+                    <img class="img" th:src="@{'/img/products/' + ${item.product.id}}" alt="img">
+                </div>
+
+                <div class="col-2 col">
+                    <p class="name" th:text="${item.product.name}"></p>
+                    <p class="stock">In stock</p>
+                    <p class="shipping">Eligble for free shipping</p>
+                    
+                    <!-- Update item quantity -->
+                    <div class="quantity">
+                        <p>Quantity</p>
+                        <form th:action="@{'/user/update-item-quantity/' + ${item.product.id}}" method="post">
+                            <input class="value" type="number" name="itemQuantity" th:value="${item.quantity}">
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
+
+                    <!-- Delete an item -->
+                    <div class="delete-item">
+                        <form th:action="@{'/user/delete-item/' + ${item.product.id}}" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="col-3 col">
+                    <p class="price" th:text="'&#8377; ' + ${item.product.price}">/p>
+                </div>
+            </div>
+
+            <div class="total-cost">
+                <p th:text="'Subtotal: &#8377; ' + ${totalCost}">/p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div th:if="${totalPages > 0}" class="pagination">
+        <a th:if="${currentPage != 0}"  th:href="@{'/user/all/'+${currentPage - 1} + '/'}">&laquo;</a>
+        <a th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" 
+            th:href="@{'/user/all/'+${i-1} + '/'}"><span th:text="${i}"></span></a>
+        <a th:if="${currentPage+1 != totalPages}"  th:href="@{'/user/all/' + ${currentPage + 1} + '/'}">&raquo;</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" th:replace="template :: footer"></div>
+
+    <script src="https://kit.fontawesome.com/75dfcc00f1.js"></script>
+    <script th:src="@{/js/template.js}"></script>
+</body>
+</html>
