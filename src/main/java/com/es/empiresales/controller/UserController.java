@@ -56,7 +56,7 @@ public class UserController {
     // show all the products
     @RequestMapping("/user/{category}/{page}/")
     public String showAllProducts(@PathVariable("category") String categoryName, @PathVariable("page") Integer page, Model m) {
-        Pageable pageable = PageRequest.of(page, 3);
+        Pageable pageable = PageRequest.of(page, 9);
         Page<Product> allProductsList = null;
 
         if(categoryName.equals("all"))
