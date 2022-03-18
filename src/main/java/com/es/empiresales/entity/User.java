@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -37,9 +39,11 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @JsonManagedReference
     private Address address;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonManagedReference
     private List<Cart> cartList = new ArrayList<>();
 
     private String role = "ROLE_USER";
