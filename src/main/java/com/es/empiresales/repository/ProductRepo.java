@@ -1,5 +1,7 @@
 package com.es.empiresales.repository;
 
+import java.util.List;
+
 import com.es.empiresales.entity.Product;
 
 import org.springframework.data.domain.Page;
@@ -14,4 +16,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     @Query("from Product as p where p.category.name =:categoryName")
     public Page<Product> findAllByCategoryName(@Param("categoryName") String categoryName, Pageable pageable);
+
+    // search query
+    public List<Product> findByNameContaining(String name);
 }

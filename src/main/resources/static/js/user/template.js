@@ -35,7 +35,7 @@ function showSearchResult() {
 
                 var a = document.createElement('a');
                 a.innerHTML = element.name;
-                a.href = `http://localhost:8081/product/${element.id}`;
+                a.href = `http://localhost:8081/user/product/${element.id}`;
                 para.append(a);
 
                 searchResult.append(para);

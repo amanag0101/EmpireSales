@@ -29,11 +29,21 @@
 
     <!-- Top Navigation Bar -->
     <div class="topnav" id="topnav" th:fragment="topnav">
-        <i class="fa-solid fa-bars hamburger" onclick="toggleSidebar()"></i>
+        <div class="col-1">
+            <i class="fa-solid fa-bars hamburger" onclick="toggleSidebar()"></i>
 
-        <li th:classappend="${#request.requestURI.startsWith('/user/all/') ? 'active' : ''}"><a th:href="@{/user/all/0/}">All Categories</a></li>
-        <li th:each="c : ${allCategoriesList}" th:classappend="${#request.requestURI.startsWith('/user/' + c.name + '/') ? 'active' : ''}">
-            <a th:text="${c.name}" th:href="@{'/user/' + ${c.name} + '/0/'}"></a></li>
+            <li th:classappend="${#request.requestURI.startsWith('/user/all/') ? 'active' : ''}"><a th:href="@{/user/all/0/}">All Categories</a></li>
+            <li th:each="c : ${allCategoriesList}" th:classappend="${#request.requestURI.startsWith('/user/' + c.name + '/') ? 'active' : ''}">
+                <a th:text="${c.name}" th:href="@{'/user/' + ${c.name} + '/0/'}"></a></li>
+        </div>
+
+        <div class="col-2">
+            <input onkeyup="showSearchResult()" id="search" class="search" type="text" name="search" placeholder="Search...">
+               
+            <div id="search-result" class="search-result">
+                <!-- <p>Search Result</p> -->
+            </div>
+        </div>
     </div>
 
     <!-- Main content -->
@@ -49,6 +59,6 @@
     </div>
 
     <script src="https://kit.fontawesome.com/75dfcc00f1.js"></script>
-    <script th:src="@{/js/template.js}"></script>
+    <script th:src="@{/js/user/template.js}"></script>
 </body>
 </html>

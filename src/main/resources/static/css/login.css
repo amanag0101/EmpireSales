@@ -23,7 +23,7 @@
     margin-bottom: 10px;
 }
 
-input[type=text], input[type=password] {
+.main-content input[type=text], .main-content input[type=password] {
     border-radius: 6px;
     border: none;
     width: 90%;
